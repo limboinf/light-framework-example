@@ -1,0 +1,16 @@
+server:
+  port: 9093
+  shutdown: graceful
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: light-framework-example
+  main:
+    allow-bean-definition-overriding: true
+  jackson:
+    date-format: yyyy-MM-dd'T'HH:mm:ss.SSS'Z'
+  lifecycle:
+    timeout-per-shutdown-phase: 10s
+

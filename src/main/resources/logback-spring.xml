@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <springProperty scope="context" name="LOG_HOME" source="logging.file.path"/>
+
+    <!-- CONSOLE start -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder charset="UTF-8">
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] |[%X{TraceId}]| %highlight(%5p) | %green(%thread) | %boldMagenta(%logger) | %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <!-- CONSOLE end -->
+
+
+    <!-- INFO start -->
+    <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_HOME}/info.log</File>
+        <append>true</append>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/info.log.%d</fileNamePattern>
+            <maxHistory>90</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] | %X{TraceId} | %level [%thread] %file:%line - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <!-- INFO end -->
+
+
+    <!-- ERROR start -->
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_HOME}/error.log</File>
+        <append>true</append>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/error.log.%d</fileNamePattern>
+            <maxHistory>90</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] | %X{TraceId} | %level [%thread] %file:%line - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <!-- ERROR end -->
+
+    <springProfile name="dev,test,prod">
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="dev,test,prod">
+        <root level="INFO">
+            <appender-ref ref="INFO"/>
+            <appender-ref ref="ERROR"/>
+        </root>
+    </springProfile>
+</configuration>
