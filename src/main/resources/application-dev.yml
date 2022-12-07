@@ -2,3 +2,18 @@ logging:
   config: classpath:logback-spring.xml
   file:
     path: ./logs
+
+light:
+  kafka:
+    enabled: true
+    servers: 127.0.0.1:9092
+    consumer:
+      servers: ${light.kafka.servers}
+      groupId: light-service
+      sessionTimeoutMs: 60000
+      maxPoolRecords: 5000
+      concurrency: 2
+      fetchMinBytes: 10485760
+      fetchMaxWaitMs: 20000
+    producer:
+      servers: ${light.kafka.servers}

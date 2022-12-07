@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserSchedule {
 
-    @Scheduled(cron = "0/5 * * * * ?")
+    @Scheduled(cron = "0/30 * * * * ?")
     public void task() {
         log.info("开启定时任务 ...");
     }
