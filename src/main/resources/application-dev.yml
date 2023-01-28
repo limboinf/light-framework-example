@@ -1,6 +1,6 @@
 logging:
   level:
-    root: DEBUG
+    root: INFO
   config: classpath:logback-spring.xml
   file:
     path: ./logs

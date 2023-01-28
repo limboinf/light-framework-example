@@ -41,7 +41,12 @@ public class UserController extends ApiController {
         JacksonDateTimeResp resp = new JacksonDateTimeResp();
         // 验证精度是否丢失
         resp.setId(1500829886697496578L);
-        resp.setPrice(BigDecimal.valueOf(987654321987654321.12345));
+        BigDecimal bigDecimal = BigDecimal.valueOf(987654321987654321.12345);
+        System.out.println(bigDecimal.toString());
+        System.out.println(bigDecimal.toPlainString());
+        System.out.println(bigDecimal.stripTrailingZeros().toPlainString());
+        System.out.println("--------");
+        resp.setPrice(bigDecimal);
         resp.setAmount(BigInteger.valueOf(1500829886697496578L));
         // 验证日期时间格式化
         resp.setDate(new Date());
