@@ -15,7 +15,6 @@
     <description>light-framework-example</description>
     <properties>
         <java.version>11</java.version>
-        <spring-cloud.version>2022.0.0-RC2</spring-cloud.version>
     </properties>
     <dependencies>
         <dependency>
@@ -51,8 +50,20 @@
 
         <dependency>
             <groupId>com.limbo</groupId>
+            <artifactId>light-web</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.limbo</groupId>
             <artifactId>light-log-spring-boot-starter</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring-context</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
